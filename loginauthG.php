@@ -1,5 +1,7 @@
 <?php
 
+if ( is_user_logged_in() )
+	exit( 'You are already logged in!!' );
 
     // Insert variables for login and db and tbl selection
     $host="localhost"; // Host name
