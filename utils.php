@@ -17,3 +17,23 @@ function is_logged_in() {
 
 	return false;
 }
+
+/**
+ * Sanitize a password stripping out dangerous characters
+ *
+ * @param string $password
+ * @return string
+ */
+function sanitize_password( $password ) {
+	return preg_replace( '/[\t\'"%<>\-\(\)\n\r]/i', '', $password );
+}
+
+/**
+ * Sanitize a username, alpha-numeric chars only!
+ *
+ * @param string $username
+ * @return string
+ */
+function sanitize_username( $username ) {
+	return preg_replace( '/[^a-z0-9]/i', '', $username );
+}
