@@ -73,10 +73,18 @@ $user_count = mysql_num_rows($user_check2);
  		}
 
 		//uses else to contradict not equal and redirect to success page
+		//Should I use sessions or cookies? Uncomment sessions if not cookies
 
 		else {
-		session_register("username");
-		session_register("password");
+
+ 	 	$hour = time() + 3600; 
+
+ 		setcookie(site_ID, $_POST['username'], $hour); 
+
+ 		setcookie(site_key, $_POST['password'], $hour);	 
+
+		//session_register("username");
+		//session_register("password");
 		header("location:login_success.php");
 		}
 	}
