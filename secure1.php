@@ -12,41 +12,45 @@ mysql_connect("$host", "$sqlusername", "$sqlpassword")or die("cannot connect to 
 mysql_select_db("$db_name")or die("cannot select DB");
 
 //Checks for a cookie, if there is one, then it GETS THOSE COOKIES
-if(isset($_COOKIE['site_ID']))
+if (isset($_COOKIE['username']))
 {
-$username = $_COOKIE['site_ID'];
-$password2 = $_COOKIE['site_key'];
-$password = md5($password2);
+$username = $_COOKIE['username'];
+$password = $_COOKIE['password'];
 
-$check1 = "SELECT * FROM $tbl_name WHERE username = '$username'";
+$check1 = "SELECT * FROM $tbl_name WHERE username = '$username' AND password = '$password'";
 $check2 = mysql_query($check1) or die(mysql_error());
-	
-	while($info = mysql_fetch_array($check2))
-	{
-		if($password != $info['password'])
-		{
+
+//Counts result, if not valid redirects	
+$user_count = mysql_num_rows($check2);
+
+	if ($user_count == 0) {
 		header("location:login.php");
-		}
 	}
 }
-
-
-/*
-
-session_start();
-
-if(!session_is_registered(username)){
+//If no cookie present, redirects
+else
+{
 header("location:login.php");
 }
 
-*/
 
 ?>
+
+<?php
+if (isset($_COOKIE['username']))
+{
+echo "Logged in as " . $_COOKIE['username'];
+}
+?>
+<br />
+<br />
 
 
 <html>
 <body>
 <p>Welcome to the secure page, if you are viewing this without logging in, then this shit is broke</p>
+<br />
+<a href=logout.php>Click here to logout</a>
 <br />
 <a href=index.html>Return to the index</a>
 </body>

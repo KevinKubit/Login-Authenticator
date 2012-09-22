@@ -31,16 +31,24 @@ if (isset($_POST['submit'])) {
  	}
 
  
-// Sanitize the username.  Otherwise could mess up the db query or inject something hazardous, must escape with username values
+// Sanitize the username.  Otherwise could mess up the db query or inject something hazardous
 
-$safe_username = mysql_real_escape_string($_POST['username']);
+function sanitize_username( $username ) {
+return preg_replace( '/[^a-z0-9]/i', '', $username );
+}
+
+$safe_username = sanitize_username($_POST['username']);
 
 
 
-//  Insert Taylors sanitize function below
 //Need to do the following below after register new user is setup
 
-$safe_password = md5($_POST['password']);
+function sanitize_password( $password ) {
+return preg_replace( '/[\t\'"%<>\-\(\)\n\r]/i', '', $password );
+}
+
+$hash_password = md5($_POST['password']);
+$safe_password = sanitize_password($hash_password);
 
 
 
@@ -79,12 +87,10 @@ $user_count = mysql_num_rows($user_check2);
 
  	 	$hour = time() + 3600; 
 
- 		setcookie(site_ID, $_POST['username'], $hour); 
+ 		setcookie(username, $safe_username, $hour); 
 
- 		setcookie(site_key, $_POST['password'], $hour);	 
+ 		setcookie(password, $safe_password, $hour);	 
 
-		//session_register("username");
-		//session_register("password");
 		header("location:login_success.php");
 		}
 	}

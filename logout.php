@@ -4,9 +4,9 @@
 
  //this makes the time in the past to DESTROY THEM COOKIES
 
- setcookie(site_ID, gone, $past); 
+ setcookie(username, gone, $past); 
 
- setcookie(site_key, gone, $past); 
+ setcookie(password, gone, $past); 
 
  header("Location: login.php"); 
 

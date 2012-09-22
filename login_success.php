@@ -12,23 +12,24 @@ mysql_connect("$host", "$sqlusername", "$sqlpassword")or die("cannot connect to 
 mysql_select_db("$db_name")or die("cannot select DB");
 
 //Checks for a cookie, if there is one, then it GETS THOSE COOKIES
-if(isset($_COOKIE['site_ID']))
+if (isset($_COOKIE['username']))
 {
-$username = $_COOKIE['site_ID'];
-$password = $_COOKIE['site_key'];
+$username = $_COOKIE['username'];
+$password = $_COOKIE['password'];
 
-$check1 = "SELECT * FROM $tbl_name WHERE username = '$username'";
+$check1 = "SELECT * FROM $tbl_name WHERE username = '$username' AND password = '$password'";
 $check2 = mysql_query($check1) or die(mysql_error());
 	
-	while($info = mysql_fetch_array($check2))
-	{
-		if($password != $info['password'])
-		{
+$user_count = mysql_num_rows($check2);
+
+	if ($user_count == 0) {
 		header("location:login.php");
-		}
 	}
 }
-
+else
+{
+header("location:login.php");
+}
 
 /*
 
@@ -41,6 +42,16 @@ header("location:login.php");
 */
 
 ?>
+
+
+<?php
+if (isset($_COOKIE['username']))
+{
+echo "Welcome back " . $_COOKIE['username'] . "!";
+}
+?>
+<br />
+<br />
 
 <html>
 <body>

@@ -61,11 +61,22 @@ if (isset($_POST['submit'])) {
  	}
 
 
+	function sanitize_username( $username ) {
+	return preg_replace( '/[^a-z0-9]/i', '', $username );
+	}
+
+	$_POST['r_user'] = sanitize_username($_POST['r_user']);
 
 	// Insert Taylors sanitize password function
  	// here we encrypt the password.
 
-	$_POST['r_pass'] = md5($_POST['r_pass']);
+
+	function sanitize_password( $password ) {
+	return preg_replace( '/[\t\'"%<>\-\(\)\n\r]/i', '', $password );
+	}
+
+	$hash_password = md5($_POST['r_pass']);
+	$_POST['r_pass'] = sanitize_password($hash_password);
 
 
  
