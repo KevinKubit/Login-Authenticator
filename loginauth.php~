@@ -4,7 +4,7 @@
     // Insert variables for login and db and tbl selection
     $host="localhost"; // Host name
     $sqlusername="root"; // Mysql username
-    $sqlpassword="insert_password"; // Mysql password
+    $sqlpassword="Sargent45^"; // Mysql password
     $db_name="users"; // Database name
     $tbl_name="users"; // Table name
     $username=$_POST['username'];

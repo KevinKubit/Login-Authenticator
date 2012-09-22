@@ -1,0 +1,20 @@
+Login Authenticator with register new user functionality.
+
+Version 0.1 (pre-actual release)
+
+Written by Kevin Kubit
+
+Current bugs and needs:
+*shortcode for sessions to insert on protected pages
+*Captcha or are you human detection for the register new user form
+*templates to make it look nicer
+*Add functionality for users that for get password, assigning temporary 
+	link for user toselect after getting link in the email they registered with
+*Add functionality to change password
+*Add functionality to accept email address and check addresses validity as well 
+	as possibility to change email address
+*check that sessions work and make sure secure pages redirect users to login or register pages
+*addslashes necessary for usernames and passwords?
+*modify to work as a plugin for wordpress so users can protect pages by login
+
+
